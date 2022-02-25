@@ -14,7 +14,7 @@ export const meta: MetaFunction = () => {
 	return {
 		description,
 		keywords: "Remix,jokes",
-		"twitter:image": "https://remix-jokes.lol/social.png",
+		"twitter:image": "/twitterCard.png",
 		"twitter:card": "summary_large_image",
 		"twitter:creator": "@remix_run",
 		"twitter:site": "@remix_run",
