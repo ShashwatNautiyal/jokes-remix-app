@@ -20,6 +20,9 @@ export const meta: MetaFunction = () => {
 		"twitter:site": "@remix_run",
 		"twitter:title": "Remix Jokes",
 		"twitter:description": description,
+		"og:title": "Remix Jokes",
+		"og:description": description,
+		"og:image": "/twitterCard.png",
 	};
 };
 
