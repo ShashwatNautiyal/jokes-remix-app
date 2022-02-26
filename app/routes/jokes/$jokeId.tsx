@@ -77,7 +77,7 @@ export default function JokeRoute() {
 					<input type="hidden" name="_method" value="delete" />
 					<button
 						type="submit"
-						className="inline-flex h-min items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-rose-400 hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500"
+						className="inline-flex h-min touch-manipulation items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-rose-400 hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500"
 					>
 						Delete
 					</button>
