@@ -1,9 +1,11 @@
-import { Joke } from "@prisma/client";
+import { Joke, User } from "@prisma/client";
 import { Link, LoaderFunction, useLoaderData, useCatch } from "remix";
 import { db } from "~/utils/db.server";
+import { getUser } from "~/utils/session.server";
 
 type LoaderData = {
 	randomJoke: Joke;
+	user: User | null;
 };
 
 export const loader: LoaderFunction = async () => {
@@ -18,7 +20,10 @@ export const loader: LoaderFunction = async () => {
 			status: 404,
 		});
 	}
-	const data: LoaderData = { randomJoke };
+	const user = await db.user.findUnique({
+		where: { id: randomJoke.jokesterId },
+	});
+	const data: LoaderData = { randomJoke, user };
 	return data;
 };
 
@@ -29,7 +34,7 @@ export default function JokesIndexRoute() {
 		<div className="flex flex-col flex-1 gap-4">
 			<p className="font-medium text-2xl">Here's a random joke:</p>
 			<p className="font-normal text-lg">{data.randomJoke.content}</p>
-			<Link to={data.randomJoke.id}>"{data.randomJoke.name}" Permalink</Link>
+			<Link to={data.randomJoke.id}>-By {data.user?.username}</Link>
 		</div>
 	);
 }

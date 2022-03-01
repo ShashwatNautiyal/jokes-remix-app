@@ -1,4 +1,4 @@
-import type { Joke } from "@prisma/client";
+import type { Joke, User } from "@prisma/client";
 import {
 	Link,
 	ActionFunction,
@@ -13,7 +13,7 @@ import {
 import { db } from "~/utils/db.server";
 import { requireUserId, getUserId } from "~/utils/session.server";
 
-type LoaderData = { joke: Joke; isOwner: boolean };
+type LoaderData = { joke: Joke; isOwner: boolean; user: User | null };
 
 export const loader: LoaderFunction = async ({ params, request }) => {
 	const userId = await getUserId(request);
@@ -26,8 +26,11 @@ export const loader: LoaderFunction = async ({ params, request }) => {
 			status: 404,
 		});
 	}
+	const user = await db.user.findUnique({
+		where: { id: joke.jokesterId },
+	});
 	if (!joke) throw new Error("Joke not found");
-	const data: LoaderData = { joke, isOwner: userId === joke.jokesterId };
+	const data: LoaderData = { joke, isOwner: userId === joke.jokesterId, user };
 	return data;
 };
 
@@ -71,7 +74,7 @@ export default function JokeRoute() {
 		<div className="flex flex-col flex-1 gap-4">
 			<p className="font-medium text-2xl">Here's your hilarious joke:</p>
 			<p className="font-normal text-lg">{data.joke.content}</p>
-			<Link to=".">{data.joke.name} Permalink</Link>
+			<Link to=".">-By {data.user?.username}</Link>
 			{data.isOwner ? (
 				<Form method="post">
 					<input type="hidden" name="_method" value="delete" />

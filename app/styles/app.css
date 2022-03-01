@@ -555,6 +555,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   flex: 1 1 0%;
 }
 
+.touch-manipulation {
+  touch-action: manipulation;
+}
+
 .appearance-none {
   -webkit-appearance: none;
      -moz-appearance: none;
