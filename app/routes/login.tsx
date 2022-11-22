@@ -108,6 +108,8 @@ export default function Login() {
 	const actionData = useActionData<ActionData>();
 	const [searchParams] = useSearchParams();
 
+    const [isSignInChecked, setIsSignInChecked] = useState(true)
+
 	return (
 		<Layout background="bg-gradient-to-br from-fuchsia-200 to-red-200">
 			<Container>
@@ -138,6 +140,7 @@ export default function Login() {
 									<label>
 										<input
 											type="radio"
+                                            onClick={() => setIsSignInChecked(true)}
 											name="loginType"
 											value="login"
 											defaultChecked={
@@ -151,6 +154,7 @@ export default function Login() {
 										<input
 											type="radio"
 											name="loginType"
+                                            onClick={() => setIsSignInChecked(false)}
 											value="register"
 											defaultChecked={
 												actionData?.fields?.loginType === "register"
@@ -245,7 +249,7 @@ export default function Login() {
 										type="submit"
 										className="w-full touch-manipulation flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
 									>
-										{actionData?.fields?.loginType === "register" ? "Register" : "Sign in"}
+										{isSignInChecked ? "Sign in" : "Register"}
 									</button>
 								</div>
 							</Form>
