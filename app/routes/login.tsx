@@ -4,6 +4,7 @@ import { ActionFunction, Form, MetaFunction } from "remix";
 import { useActionData, json, Link, useSearchParams } from "remix";
 import { db } from "~/utils/db.server";
 import { createUserSession, login, register } from "~/utils/session.server";
+import { useState } from "react";
 
 function validateUsername(username: unknown) {
 	if (typeof username !== "string" || username.length < 3) {
